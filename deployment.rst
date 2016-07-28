@@ -103,7 +103,7 @@ You should see "Good signature". Take due note of the WARNING you'll receive if
 you don't have a trust path to the key. Then use the manifest to verify
 checksums::
 
-    $ sha512sum -c tapp-deployment/manifest.sha512
+    $ sha512sum -c tapp-deployment/manifest
 
 Build and Install libsecp256k1
 ------------------------------
