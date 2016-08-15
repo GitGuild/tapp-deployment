@@ -119,11 +119,14 @@ can confirm the SHA1 from a comment in the signed manifest)::
 
     $ cd secp256k1
     $ git checkout d7eb1ae96dfe9d497a26b3e7ff8b6f58e61e400a
+
+Build and install to a staging directory::
+
     $ ./autogen.sh
     $ ./configure --without-asm --without-bignum --enable-module-recovery
     $ make
     $ make install DESTDIR=$PWD/staging
-    $ tar czf secp256k1-built.tar.gz --owner root --group root -C staging usr
+    $ tar czf secp256k1-built.tar.gz -C staging usr
 
 Configure options explained:
 
@@ -141,9 +144,33 @@ Configure options explained:
 As root, install and refresh the dynamic linker cache::
 
     $ exit
-    # tar xf /home/build/secp256k1/secp256k1-built.tar.gz -C /
+    # tar xzf /home/build/secp256k1/secp256k1-built.tar.gz --no-same-owner -C /
     # ldconfig
     # su - build
+
+OpenBSD Notes
++++++++++++++
+
+A few extra details are required to build on OpenBSD (and possibly other BSDs).
+Several versions of autotools are available so you must explicitly specify
+which; those listed here were tested on OpenBSD 5.8. The GNU versions of
+``libtool`` and ``make`` also appear to be required. As root::
+
+    # pkg_add automake-1.15 libtool gmake
+
+As the build user, before running ``autogen.sh``::
+
+    $ export AUTOCONF_VERSION=2.69
+    $ export AUTOMAKE_VERSION=1.15
+
+When building, use ``gmake`` instead of ``make``.
+
+When installing, omit the ``--no-same-owner`` option to ``tar``: it's a GNU
+extension and is the default behavior on BSD (altered by the ``-p`` flag).
+
+When running ``ldconfig``, be sure to use the ``-R`` option, otherwise only the
+built-in system library paths will be scanned. (This can be repaired by a
+reboot, or see ``/etc/rc``).
 
 Build Python Packages
 ---------------------
@@ -258,6 +285,10 @@ EXAMPLE KEY IN PRODUCTION!** From a Python prompt::
 
 It is assumed that you already have your desired currency node software
 configured; set its RPCURL in the corresponding plugin section.
+
+[TODO block/tx notify]
+
+[TODO plugin database initialization]
 
 Service Management
 ------------------

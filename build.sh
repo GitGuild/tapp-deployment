@@ -1,9 +1,12 @@
 #!/bin/sh
 set -e
 
-PYTHON=/usr/bin/python2
+PYTHON=python2.7
 SRCDIR=$PWD/pypi
 EGGDIR=$SRCDIR/eggs
+
+# OpenBSD gcc doesn't search /usr/local/include by default
+CFLAGS=-I/usr/local/include; export CFLAGS
 
 mkdir -p $EGGDIR
 cd $SRCDIR

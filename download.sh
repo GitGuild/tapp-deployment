@@ -12,7 +12,7 @@ get () {
     else
         echo "Downloading $url"
         curl -o "$filename" "$url"
-        #wget "$url"
+        #ftp -o "$filename" "$url" # OpenBSD
     fi
 }
 
