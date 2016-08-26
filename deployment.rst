@@ -219,7 +219,7 @@ would preserve ownership)::
 
 Now install the works::
 
-    # easy_install desw desw_bitcoin desw_dash sqlalchemy_login_models gunicorn
+    # easy_install desw desw_bitcoin desw_dash sqlalchemy_models gunicorn
 
 There is no ``easy_uninstall`` so take note of where it writes files (probably
 under ``/usr/local/lib/pythonX.Y`` and ``/usr/local/bin``). You can use a
@@ -267,9 +267,8 @@ e.g.::
     FEE: 0
     CURRENCIES: []
 
-An example for connecting to the ``desw`` database in PostgreSQL through its
-local Unix-domain socket with peer authentication, using the ``psycopg2``
-connector::
+An example for connecting to the ``desw`` database in PostgreSQL, using its
+Unix-domain socket with peer authentication and the ``psycopg2`` connector::
 
     [db]
     SA_ENGINE_URI: postgresql+psycopg2://@/desw
