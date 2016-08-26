@@ -95,6 +95,9 @@ build_sqlalchemy () {
 }
 build SQLAlchemy-1.0.14 build_sqlalchemy
 
+# PostgreSQL database connector
+build psycopg2-2.6.2
+
 # Flask web "microframework"
 build Flask-0.10.1
 build Werkzeug-0.11.10

@@ -33,6 +33,10 @@ For Python ``cffi``::
 
     # apt-get install libffi-dev python-dev
 
+For ``psycopg2``::
+
+    # apt-get install libpq-dev
+
 For Python package building and deployment::
 
     # apt-get install python-setuptools
